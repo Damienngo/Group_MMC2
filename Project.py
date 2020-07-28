@@ -1,19 +1,15 @@
-import socket;
-s = socket.socket();
-print("Socket Created");
+import socket
 
-#Connect to port number
-port = 4567;
+s =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.settimeout(5)
 
-#Bind to port
-s.bind(('',port));
-print("Socket bind to %s" %(port));
+host = input("Please enter the IP address that you want to Scan: ")
+port = int(input("Please enter the port you want to Scan: "))
 
-#Listen to port
-s.listen(5);
-print("Socket is listening..");
+def portScanner(port):
+    if s.connect_ex((host, port)):
+        print("The port is closed")
+    else:
+        print("The Port is open")
 
-#Forever loop to listen
-while True:
-    c, addr = s.accept();
-    print("Connection from",addr);
+portScanner(port)
